@@ -1,7 +1,7 @@
 #! /usr/bin/python
 import os
 
-from utils.setup_toolbox import mac_address, get_facility_name
+from utils.setup_toolbox import mac_address, get_serial, get_facility_name
 
 
 def configure_site():

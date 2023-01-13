@@ -2,8 +2,10 @@
 # !/bin/bash
 import json
 import re
+import subprocess
 import uuid
 
+from utils.get_serial import save_host_serial
 from utils.utilities import load_file, get_request
 from utils.validate_emr_data import save_facility_details
 
@@ -109,7 +111,16 @@ def mac_address():
     return mac
 
 
-def send_mac_address():
-    return True
-
-
+def get_serial():
+    """
+    gets machine Serial number
+    :return:
+        host_serial_number : serial number of a machine
+    """
+    # password for admin access permenisions
+    # linux (debian) for geting srial numbetr
+    command = 'sudo dmidecode -s system-serial-number'.split()
+    cmd2 = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    output = cmd2.stdout.read().strip()
+    save_host_serial(output.decode())
+    return output
