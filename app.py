@@ -11,6 +11,12 @@ from utils.validate_emr_data import validate_config_file
 app = Flask(__name__, static_folder="templates/static")
 
 
+@app.route('/test')
+def test():
+
+    return jsonify({"SUCCESS": "System is perfectly working"})
+
+
 @app.route('/')
 def extract_data():
     """gets EMR data and creates a QR Image
@@ -18,6 +24,10 @@ def extract_data():
     Returns:
         dict: hosts from api
     """
+    # check if the serial key has been retrieved
+    if not exists(data["serial_key"]):
+        get_serial() # if the serial key is not available, then create one
+
     # first verify if the data is correct in the config file
 
     config_file_data = validate_config_file(data["config"])
@@ -28,6 +38,14 @@ def extract_data():
     # 1. get EMR version and mac address
     emr_data = check_installation_folders(data["apps_loc"])
     mac = mac_address()
+    # 2. Get Serial number
+    serial_number = get_host_serial()
+    # 3. get System Utilization Stats and OS details
+    hdd = get_hdd_details()
+    ram = get_ram_details()
+    os_info = platform_info()
+    cpu = get_cpu_utilization()
+
     if not emr_data:
         return render_template('error.html')
     # 2. This is a final Dictionary to be sent for QR Image generation
@@ -36,7 +54,19 @@ def extract_data():
             "1": "Toolbox",
             "uuid": config_file_data["uuid"],
             "app_id": config_file_data["app_id"],
-            "module": emr_data
+            "system_utilization": {
+                "hdd_total_storage": hdd["hdd_total_storage"],
+                "hdd_used_storage": hdd["hdd_used_storage"],
+                "hdd_remaining_storage": hdd["hdd_remaining_storage"],
+                "hdd_used_in_percentiles": hdd["hdd_used_in_percentiles"],
+                "total_ram": ram["total_ram"],
+                "used_ram": ram["used_ram"],
+                "remaining_ram": ram["remaining_ram"],
+                "cpu_utilization": cpu,
+                "os_name": os_info["name"],
+                "os_version": os_info["version"]},
+            "module": emr_data,
+            "serial_number": serial_number
 
         }
 
@@ -48,5 +78,17 @@ def extract_data():
     site_name = load_file(data["config"])
     return render_template('index.html', site_name=site_name["site_name"])
 
+
+@app.route('/getImage', methods=['GET'])
+def get_image_url():
+    """
+    Api endpoint that gets the qr image url and site name
+    :return: json
+    """
+    image_url = data["toolbox_image"]
+    site_name = load_file(data["config"])
+    return jsonify({'url': image_url, 'site': site_name["site_name"]})
+
+
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', debug=True, port=6870)
+    app.run(host='127.0.0.1', debug=True, port=6070)

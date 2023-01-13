@@ -2,7 +2,7 @@
 import json
 
 from utils.utilities import write_file
-from config.config import data
+from config.config import data, setup_emr, modules
 
 
 def validate_config_file(location):
@@ -26,11 +26,11 @@ def save_facility_details(site_data):  # this function will be called whe we imp
     # details to be entered on the web browser
     if site_data["apps"][0] == "Point of Care":
         app_id = 1
-        information = {"core": "/var/www/BHT-Core", "art": "/var/www/BHT-Core/apps/ART", "api": "/var/www/BHT-EMR-API"}
+        information = {"core": setup_emr["core"], "api": setup_emr["api"]}
         write_file(data["apps_loc"], information)
     else:
         app_id = 2
-        information_emc = {"emc": "/var/www/emastercard-upgrade-automation"}
+        information_emc = {"emc": setup_emr["emc"]}
         write_file(data["apps_loc"], information_emc)
 
     site_name = site_data["name"]
@@ -48,13 +48,13 @@ def append_other_apps(app_id):
     """
     # ("1. NONE \n 2. ANC \n 3. Maternity \n 4. HTS \n 5. OPD \n ")
     if app_id == 2:
-        location = {"anc": "/var/www/BHT-Core/apps/ANC"}
+        location = {"anc": modules["anc"]}
     if app_id == 3:
-        location = {"maternity": "/var/www/BHT-Core/apps/MATERNITY"}
+        location = {"maternity": modules["maternity"]}
     if app_id == 4:
-        location = {"hts": "/var/www/BHT-Core/apps/HTS"}
+        location = {"hts": modules["hts"]}
     if app_id == 5:
-        location = {"opd": "/var/www/BHT-Core/apps/OPD"}
+        location = {"opd": modules["opd"]}
 
     # Read JSON file
     with open(data["apps_loc"]) as apps:
