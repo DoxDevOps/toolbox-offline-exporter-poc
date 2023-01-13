@@ -18,12 +18,12 @@ def check_installation_folders(path):
     apps_dir = load_file(path)
     apps_dir = json.dumps(apps_dir)
     apps_dir = json.loads(apps_dir)
-    print(apps_dir)
+
     for key in apps_dir:
         if exists(apps_dir[key]):
             tag = get_emr_versions(apps_dir[key])
             version_dict[key] = tag
-    print(version_dict)
+
     json_object = json.dumps(version_dict)
     json_object = json.loads(json_object)
     return json_object
