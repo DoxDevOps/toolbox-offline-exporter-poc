@@ -9,19 +9,8 @@ def configure_site():
        configures toolbox
        :return:
        """
-    # Configures the site
-    # install pip
-    print("Step 1 : Update laptop")
-    answer = os.system("sudo apt-get update")
-    print("Step 2: Install Pip.")
-    os.system("sudo apt install python-pip")
-    print("Step3 : install python environment")
-    os.system("sudo apt install virtualenv")
-    os.system("virtualenv flask")
-    print("*********** SETTING FACILITY DETAILS *****************")
-    os.system(". flask/bin/activate && pip install -r requirements.txt && sudo apt-get install git")
-
-    print("******************************************************")
+    print("********** LET'S SET UP TOOLBOX ON THE SERVER **********")
+    print("..........")
     os.system(". flask/bin/activate && python -c 'from utils.setup_toolbox import "
               "get_facility_name; "
               "get_facility_name()'")
