@@ -6,8 +6,25 @@ import subprocess
 import uuid
 
 from utils.get_serial import save_host_serial
-from utils.utilities import load_file, get_request
+from utils.utilities import load_file, get_all, write_file
 from utils.validate_emr_data import save_facility_details
+
+
+def offline_setup():
+    """
+    This step is for offline installation on POC. It get all sites and save them in a json file
+    :return:
+    """
+
+    settings = load_file("config/.json")
+    url = settings["endpoint"]
+    token = settings["token"]
+    results = get_all(url, token)
+
+    results = results.json()
+
+    write_file(settings["sites_dir"], results)
+    return True
 
 
 def get_facility_name():
@@ -27,19 +44,23 @@ def search_facilities(facility_name):
     :return: boolean (just a checker)
     """
     settings = load_file("config/.json")
-    url = settings["endpoint"]
-    token = settings["token"]
-    json_dict = {'site_name': facility_name}
-    # convert json_dict to JSON
-    json_data = json.dumps(json_dict)
-    # Creating a Post request
-    results = get_request(url, token, json_data)
-    print(results)
-    if len(results) != 2:
-        display_facilities(results)
+    data = load_file(settings["sites_dir"])
+    data = json.dumps(data)
+
+    facilities = json.loads(data)
+    found_sites = []
+    counter = 0
+    for facility in facilities:
+        if facility_name.lower() in (facility['fields']['name']).lower():
+            counter += 1
+            found_sites.append(facility)
+
+    if len(found_sites) != 2:
+        display_facilities(found_sites)
     else:
         print("\n No match Found, Please try again:")
-        get_facility_name()  # start all over
+        get_facility_name()
+
     return True
 
 
@@ -49,6 +70,7 @@ def display_facilities(facilities):
     :param facilities: json object
     :return:
     """
+    facilities = json.dumps(facilities)
     facilities = json.loads(facilities)
     counter = 0
     for facility in facilities:
