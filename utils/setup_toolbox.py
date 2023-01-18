@@ -34,6 +34,7 @@ def search_facilities(facility_name):
     json_data = json.dumps(json_dict)
     # Creating a Post request
     results = get_request(url, token, json_data)
+    print(results)
     if len(results) != 2:
         display_facilities(results)
     else:

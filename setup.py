@@ -25,7 +25,7 @@ def configure_site():
     os.system(". flask/bin/activate && python -c 'from utils.setup_toolbox import "
               "get_facility_name; "
               "get_facility_name()'")
-    mac_address()
+    #mac_address()
     print("*********** END - Facility Configured Successfully *****************")
     print("creating Toolbox Service")
     os.system("sudo cp toolbox.desktop ~/Desktop/")

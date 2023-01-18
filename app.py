@@ -19,7 +19,7 @@ app = Flask(__name__, static_folder="templates/static")
 @app.route('/test')
 def test():
 
-    return jsonify({"SUCCESS": "System is perfectly working"})
+    return 1
 
 
 @app.route('/')
@@ -84,15 +84,15 @@ def extract_data():
     return render_template('index.html', site_name=site_name["site_name"])
 
 
-@app.route('/getImage', methods=['GET'])
-def get_image_url():
-    """
-    Api endpoint that gets the qr image url and site name
-    :return: json
-    """
-    image_url = data["toolbox_image"]
-    site_name = load_file(data["config"])
-    return jsonify({'url': image_url, 'site': site_name["site_name"]})
+#@app.route('/getImage', methods=['GET'])
+#def get_image_url():
+#    """
+#    Api endpoint that gets the qr image url and site name
+#    :return: json
+#    """
+#    image_url = data["toolbox_image"]
+#    site_name = load_file(data["config"])
+#    return jsonify({'url': image_url, 'site': site_name["site_name"]})
 
 
 if __name__ == '__main__':

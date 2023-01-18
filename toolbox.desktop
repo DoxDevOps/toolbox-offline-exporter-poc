@@ -3,4 +3,4 @@ Encoding=UTF-8
 Name=Toolbox
 Type=Link
 URL=http://127.0.0.1:6070/
-Icon=~/var/www/toolbox-offline-exporter/templates/static/images/icon.png
+Icon=~/var/www/toolbox-offline-exporter-poc/templates/static/images/icon.png
