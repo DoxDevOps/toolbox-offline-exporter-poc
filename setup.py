@@ -17,7 +17,7 @@ def configure_site():
     #mac_address()
     print("*********** END - Facility Configured Successfully *****************")
     print("creating Toolbox Service")
-    os.system("sudo cp toolbox.desktop ~/Desktop/")
+    #os.system("sudo cp toolbox.desktop ~/Desktop/")
     # here is the code for creating the site.
     os.system("sudo cp toolbox.service /etc/systemd/system/")
     os.system("sudo systemctl daemon-reload && sudo systemctl start toolbox && sudo systemctl enable toolbox")
