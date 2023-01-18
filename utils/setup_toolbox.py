@@ -12,7 +12,7 @@ from utils.validate_emr_data import save_facility_details
 
 def offline_setup():
     """
-    This step is for offline installation on POC. It get all sites and save them in a json file
+    This step is for offline installation on POC. It gets all sites and save them in a json file
     :return:
     """
 
@@ -84,8 +84,7 @@ def select_facility(facilities, counter):
     """
     gives a user an option to select sites from a given list
     :type counter: int
-    :type facilities: json object
-    :param facilities: json object
+    :type facilities: json object    :param facilities:
     :param counter: a counter on the number of sites retrieved
     """
     while True:
