@@ -18,3 +18,5 @@ idna~=2.10
 urllib3~=1.26.9
 setuptools~=44.1.1
 Flask~=1.1.4
+distro~=1.6.0
+requests~=2.27.1

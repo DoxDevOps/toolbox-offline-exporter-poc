@@ -1,7 +1,5 @@
 import json
 from os.path import exists
-
-import jsonify as jsonify
 from flask import Flask, render_template
 from config.config import data
 from utils.export_emr_data import check_installation_folders
