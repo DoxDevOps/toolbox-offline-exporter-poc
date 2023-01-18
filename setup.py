@@ -23,11 +23,11 @@ def configure_site():
     os.system("sudo systemctl daemon-reload && sudo systemctl start toolbox && sudo systemctl enable toolbox")
     print("FINISHED :creating Toolbox Service \n")
     print("******************************************************************** \n")
-    print ("Lastly select other modules installed !")
-    os.system(". flask/bin/activate && python -c 'from utils.setup_other_apps import "
-              "choose_app; "
-              "choose_app()'")
-    print("FINISHED :Setting up other modules")
+    #print ("Lastly select other modules installed !")
+    #os.system(". flask/bin/activate && python -c 'from utils.setup_other_apps import "
+    #          "choose_app; "
+    #          "choose_app()'")
+    #print("FINISHED :Setting up other modules")
     return True
 
 
