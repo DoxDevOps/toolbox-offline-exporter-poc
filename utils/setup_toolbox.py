@@ -20,9 +20,7 @@ def offline_setup():
     url = settings["endpoint"]
     token = settings["token"]
     results = get_all(url, token)
-
     results = results.json()
-
     write_file(settings["sites_dir"], results)
     return True
 
