@@ -5,7 +5,7 @@ from config.config import data
 from utils.export_emr_data import check_installation_folders
 from utils.generate_qr_image import add_qr_data
 from utils.get_serial import get_host_serial
-from utils.setup_toolbox import mac_address, get_serial
+from utils.setup_toolbox import mac_address, get_serial, get_facility_name, offline_setup
 from utils.system_utilization import get_hdd_details, get_ram_details, platform_info, get_cpu_utilization
 from utils.utilities import load_file
 from utils.validate_emr_data import validate_config_file

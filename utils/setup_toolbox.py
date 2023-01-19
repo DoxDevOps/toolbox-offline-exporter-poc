@@ -30,7 +30,7 @@ def get_facility_name():
     starting point. prompts user to enter a suggested facility name
     :return: Boolean (just a checker )
     """
-    facility_name = raw_input("Enter Facility Name Please: ")
+    facility_name = input("Enter Facility Name Please: ")
     search_facilities(facility_name)
     return True
 
@@ -87,7 +87,7 @@ def select_facility(facilities, counter):
     """
     while True:
         try:
-            facility_number = int(raw_input("\nConfirm Facility Name by Entering a Number: ")) - 1
+            facility_number = int(input("\nConfirm Facility Name by Entering a Number: ")) - 1
 
             if facility_number + 1 > counter:
                 print("The number selected is not on the list, Please try again.")
