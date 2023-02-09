@@ -30,7 +30,7 @@ def get_facility_name():
     starting point. prompts user to enter a suggested facility name
     :return: Boolean (just a checker )
     """
-    facility_name = input("Enter Facility Name Please: ")
+    facility_name = raw_input("Enter Facility Name Please: ")
     search_facilities(facility_name)
     return True
 

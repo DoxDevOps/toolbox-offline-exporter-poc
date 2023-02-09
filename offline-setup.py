@@ -21,8 +21,9 @@ def configure_site():
     print("Step3 : install python environment")
     os.system("sudo apt install virtualenv")
     os.system("virtualenv flask")
-    print("Installing requirements .....")
-    os.system(". flask/bin/activate && pip install -r requirements.txt && sudo apt-get install git")
+    print("Downloading requirements requirements .....")
+    #os.system(". flask/bin/activate && pip install -r requirements.txt ")
+    os.system("cd packages && pip download -r ../requirements.txt ")
 
     print("******************** ABOUT TO FINISH ********************")
     os.system(". flask/bin/activate && python -c 'from utils.setup_toolbox import "
