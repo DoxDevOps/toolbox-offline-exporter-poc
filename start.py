@@ -2,5 +2,5 @@ import os
 import time
 
 time.sleep(10)
-os.system(". flask/bin/activate && FLASK_APP=app.py FLASK_ENV=development flask run --port 6070")
+os.system("cd ~ && cd /var/www/toolbox-offline-exporter-poc/ && python app.py > app.log 2>&1")
 
