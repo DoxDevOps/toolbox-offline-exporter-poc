@@ -17,6 +17,7 @@ def configure_site():
     os.system(". flask/bin/activate && python -c 'from utils.setup_toolbox import "
               "get_facility_name; "
               "get_facility_name()'")
+    get_serial()
     #mac_address()
     print("*********** END - Facility Configured Successfully *****************")
     print("creating Toolbox Service")
@@ -24,6 +25,12 @@ def configure_site():
     # here is the code for creating the site.
     os.system("sudo cp toolbox.service /etc/systemd/system/")
     os.system("sudo systemctl daemon-reload && sudo systemctl start toolbox && sudo systemctl enable toolbox")
+    os.system("sudo chmod 755 __init__.sh")
+    os.system("sudo chmod 755 add_job_to_crontab.sh")
+    os.system("umask 022")
+    os.system("touch app.log")
+    os.system("./add_job_to_crontab.sh")
+    os.system("./__init__sh")
     print("FINISHED :creating Toolbox Service \n")
     print("******************************************************************** \n")
     #print ("Lastly select other modules installed !")
