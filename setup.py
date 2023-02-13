@@ -30,7 +30,7 @@ def configure_site():
     os.system("umask 022")
     os.system("touch app.log")
     os.system("./add_job_to_crontab.sh")
-    os.system("./__init__sh")
+    os.system("./__init__.sh")
     print("FINISHED :creating Toolbox Service \n")
     print("******************************************************************** \n")
     #print ("Lastly select other modules installed !")
